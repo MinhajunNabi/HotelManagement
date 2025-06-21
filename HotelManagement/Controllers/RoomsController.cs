@@ -68,15 +68,32 @@ namespace HotelManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "RoomId,RoomNumber,Type,PricePerNight,IsAvailable")] Room room)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(room).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // If validation fails, return back to the Edit view with validation messages
+                return View(room);
             }
 
-            return View(room);
+            var existingRoom = db.Rooms.Find(room.RoomId);
+
+            if (existingRoom == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Update fields
+            existingRoom.RoomNumber = room.RoomNumber;
+            existingRoom.Type = room.Type;
+            existingRoom.PricePerNight = room.PricePerNight;
+            existingRoom.IsAvailable = room.IsAvailable;
+
+            // Save changes to the database
+            db.SaveChanges();
+
+            // Redirect to the list of rooms
+            return RedirectToAction("Index");
         }
+
 
         // GET: Rooms/Delete/5
         public ActionResult Delete(int? id)
