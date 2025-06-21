@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Context\ApplicationDbContext.cs" />
+    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,7 +139,16 @@
     <Compile Include="Migrations\202506210909151_RoomTable.Designer.cs">
       <DependentUpon>202506210909151_RoomTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506211415449_GuestTable.cs" />
+    <Compile Include="Migrations\202506211415449_GuestTable.Designer.cs">
+      <DependentUpon>202506211415449_GuestTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506211502512_GuestTable-force.cs" />
+    <Compile Include="Migrations\202506211502512_GuestTable-force.Designer.cs">
+      <DependentUpon>202506211502512_GuestTable-force.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -183,6 +193,11 @@
     <Content Include="Views\Rooms\Details.cshtml" />
     <Content Include="Views\Rooms\Delete.cshtml" />
     <Content Include="Views\Rooms\Edit.cshtml" />
+    <Content Include="Views\Guest\Index.cshtml" />
+    <Content Include="Views\Guest\Details.cshtml" />
+    <Content Include="Views\Guest\Create.cshtml" />
+    <Content Include="Views\Guest\Edit.cshtml" />
+    <Content Include="Views\Guest\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -203,6 +218,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202506210909151_RoomTable.resx">
       <DependentUpon>202506210909151_RoomTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506211415449_GuestTable.resx">
+      <DependentUpon>202506211415449_GuestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506211502512_GuestTable-force.resx">
+      <DependentUpon>202506211502512_GuestTable-force.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

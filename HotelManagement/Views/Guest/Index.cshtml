@@ -1,0 +1,34 @@
+﻿@model IEnumerable<HotelManagement.Models.Guest>
+
+@{
+    ViewBag.Title = "Guests";
+}
+
+<h2>Guest List</h2>
+
+<p>
+    @Html.ActionLink("Add New Guest", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FullName)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.Phone)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.GuestId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.GuestId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.GuestId })
+            </td>
+        </tr>
+    }
+</table>

@@ -23,6 +23,7 @@ namespace HotelManagement.Context
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<Guest> Guests { get; set; }
     }
 
     //public class MyEntity

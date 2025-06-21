@@ -1,0 +1,26 @@
+﻿@model HotelManagement.Models.Guest
+
+@{
+    ViewBag.Title = "Guest Details";
+}
+
+<h2>Guest Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Full Name</dt>
+        <dd>@Html.DisplayFor(model => model.FullName)</dd>
+
+        <dt>Email</dt>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
+
+        <dt>Phone</dt>
+        <dd>@Html.DisplayFor(model => model.Phone)</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GuestId }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Back to List", "Index", "Guest", null, new { @class = "btn btn-default" })
+</p>

@@ -82,3 +82,5 @@ D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelM
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.pdb
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.RoomTable.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.GenerateResource.cache
+D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.GuestTable.resources
+D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.GuestTableforce.resources
