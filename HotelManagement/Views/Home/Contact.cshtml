@@ -1,17 +1,36 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<div class="container mt-5" style="max-width: 700px;">
+    <h2 class="text-center mb-4">Contact Us</h2>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <p class="text-center text-muted mb-4">
+        Have questions or need assistance? Reach out to us — we’re here to help!
+    </p>
+
+    <form class="border p-4 rounded shadow-sm bg-light">
+        <div class="mb-3">
+            <label for="name" class="form-label">Your Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Enter your name" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Your Email</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" rows="4" class="form-control" placeholder="Type your message here" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+    </form>
+
+    <div class="text-center mt-5">
+        <p><strong>Email:</strong> support@yourhotel.com</p>
+        <p><strong>Phone:</strong> +880 1234 567890</p>
+        <p><strong>Address:</strong> 123 Hotel Street, Dhaka, Bangladesh</p>
+    </div>
+</div>

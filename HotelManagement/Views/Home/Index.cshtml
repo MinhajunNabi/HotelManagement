@@ -2,30 +2,61 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2></h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
         </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865"></a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2></h2>@{
+            ViewBag.Title = "Home";
+        }
+
+        <div class="container mt-5">
+            <div class="text-center">
+                <h1 class="display-5 fw-bold mb-4">Welcome to Our Hotel Management System</h1>
+                <p class="lead mb-4">
+                    Book your rooms, order delicious food, and manage your stay with ease.
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="@Url.Action("Create", "Bookings")" class="btn btn-primary btn-lg">Book a Room</a>
+                    <a href="@Url.Action("Create", "FoodOrders")" class="btn btn-success btn-lg">Order Food</a>
+                </div>
+            </div>
+
+            <hr class="my-5" />
+
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3">
+                        <h4>Comfortable Rooms</h4>
+                        <p>Choose from a variety of room types for a relaxing stay.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3">
+                        <h4>Fast Food Service</h4>
+                        <p>Order from our curated menu anytime during your stay.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm p-3">
+                        <h4>Easy Access</h4>
+                        <p>Book and manage everything right from your dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866"></a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2></h2>
+        <p></p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867"></a></p>
     </div>
 </div>
