@@ -26,7 +26,11 @@ namespace HotelManagement.Models
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
-        public virtual ICollection<Room> Rooms { get; set; }
+        public int RoomId { get; set; } // Foreign key
+
+        [Display(Name = "Room")]
+        public virtual Room Room { get; set; } // Navigation property
+
         //public virtual ICollection<FoodOrder> FoodOrders { get; set; }
     }
 }

@@ -152,6 +152,14 @@
     <Compile Include="Migrations\202506271625173_AddUserTable.designer.cs">
       <DependentUpon>202506271625173_AddUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506280841241_room.cs" />
+    <Compile Include="Migrations\202506280841241_room.designer.cs">
+      <DependentUpon>202506280841241_room.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506280952261_roomnum.cs" />
+    <Compile Include="Migrations\202506280952261_roomnum.designer.cs">
+      <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\FoodOrder.cs" />
@@ -240,6 +248,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506271625173_AddUserTable.resx">
       <DependentUpon>202506271625173_AddUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506280841241_room.resx">
+      <DependentUpon>202506280841241_room.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506280952261_roomnum.resx">
+      <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

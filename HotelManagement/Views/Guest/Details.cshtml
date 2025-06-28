@@ -15,9 +15,14 @@
         <dt>Email</dt>
         <dd>@Html.DisplayFor(model => model.Email)</dd>
 
-
         <dt>Phone</dt>
         <dd>@Html.DisplayFor(model => model.Phone)</dd>
+
+        <dt>Room Number</dt>
+        <dd>@(Model.Room != null ? Model.Room.RoomNumber : "N/A")</dd>
+
+        <dt>Price Per Night</dt>
+        <dd>@(Model.Room != null ? Model.Room.PricePerNight.ToString("C") : "N/A")</dd>
     </dl>
 </div>
 
