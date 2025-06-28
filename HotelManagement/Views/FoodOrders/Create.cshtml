@@ -2,24 +2,50 @@
 
 @{
     ViewBag.Title = "Order Food";
+
+    // Dummy food list
+    var foodList = new List<dynamic>
+{
+        new { Name = "Burger", Image = Url.Content("~/Content/Images/burger.png") },
+        new { Name = "Pizza", Image = Url.Content("~/Content/Images/pizza.png") },
+        new { Name = "Pasta", Image = Url.Content("~/Content/Images/pasta.png") },
+        new { Name = "Chicken", Image = Url.Content("~/Content/Images/chicken.png") },
+    };
 }
 
-<div class="container mt-5" style="max-width: 500px;">
+<div class="container mt-5" style="max-width: 700px;">
     <h2 class="text-center mb-4">Order Food</h2>
 
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "border p-4 rounded shadow-sm bg-light" }))
+    @using (Html.BeginForm())
     {
-        <div class="form-group mb-3">
+        @Html.AntiForgeryToken() <!-- ✅ Fix added here -->
+
+        <div class="mb-3">
             @Html.LabelFor(m => m.GuestName, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.GuestName, new { @class = "form-control", placeholder = "Enter guest name" })
         </div>
 
-        <div class="form-group mb-3">
-            @Html.LabelFor(m => m.FoodItem, new { @class = "form-label" })
-            @Html.TextBoxFor(m => m.FoodItem, new { @class = "form-control", placeholder = "Enter food item" })
+        <div class="mb-3">
+            <label class="form-label">Select Food Items</label>
+            <div class="row">
+                @foreach (var food in foodList)
+                {
+                    <div class="col-md-3 mb-3">
+                        <div class="card text-center">
+                            <img src="@food.Image" class="card-img-top" alt="@food.Name" style="height: 100px; object-fit: cover;" />
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="FoodItems" value="@food.Name" id="@food.Name" />
+                                    <label class="form-check-label" for="@food.Name">@food.Name</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
 
-        <div class="form-group mb-4">
+        <div class="mb-4">
             @Html.LabelFor(m => m.Quantity, new { @class = "form-label" })
             @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", placeholder = "Enter quantity" })
         </div>

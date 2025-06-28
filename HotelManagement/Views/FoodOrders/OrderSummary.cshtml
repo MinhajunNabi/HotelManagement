@@ -1,0 +1,58 @@
+﻿@model HotelManagement.Models.FoodOrder
+
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="text-center mb-4">Order Summary</h2>
+
+    <p><strong>Guest Name:</strong> @Model.GuestName</p>
+    <p><strong>Food Items:</strong> @Model.SelectedItems</p>
+    <p><strong>Quantity:</strong> @Model.Quantity</p>
+    <p><strong>Total Price:</strong> <span class="text-success fw-bold">@Model.TotalPrice Tk</span></p>
+
+    <!-- Pay Now Button -->
+    <button type="button" class="btn btn-primary" onclick="showPaymentOptions(@Model.Id)">Pay Now</button>
+
+    <div class="alert alert-success mt-4">
+        ✅ Your order has been placed successfully!
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModalLabel">Select Payment Method</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <button onclick="pay('bkash')" class="btn btn-outline-danger w-100 mb-2">Pay with bKash</button>
+                <button onclick="pay('card')" class="btn btn-outline-primary w-100 mb-2">Pay with Card</button>
+                <button onclick="pay('nagad')" class="btn btn-outline-warning w-100">Pay with Nagad</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Script -->
+@section scripts {
+    <script>
+        var orderId = 0;
+
+        function showPaymentOptions(id) {
+            orderId = id;
+            const modalElement = document.getElementById('paymentModal');
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+        }
+
+        function pay(method) {
+            if (method === 'card') {
+                window.location.href = '/Payment/CardPayment?orderId=' + orderId;
+            } else {
+                window.location.href = '/Payment/Process?method=' + method + '&orderId=' + orderId;
+            }
+        }
+    </script>
+}
+
+

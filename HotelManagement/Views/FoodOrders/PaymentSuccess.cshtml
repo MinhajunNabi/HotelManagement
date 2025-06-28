@@ -1,0 +1,12 @@
+﻿@model HotelManagement.Models.FoodOrder
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="alert alert-success text-center">
+        <h2>@ViewBag.Message</h2>
+        <p><strong>Guest Name:</strong> @Model.GuestName</p>
+        <p><strong>Items:</strong> @Model.SelectedItems</p>
+        <p><strong>Quantity:</strong> @Model.Quantity</p>
+        <p><strong>Total Paid:</strong> @Model.TotalPrice Tk</p>
+        <a href="/" class="btn btn-primary mt-3">Back to Home</a>
+    </div>
+</div>

@@ -14,9 +14,13 @@ namespace HotelManagement.Models
         public string GuestName { get; set; }
 
         [Required]
-        public string FoodItem { get; set; }
+        public string SelectedItems { get; set; } // e.g. "Pizza,Burger"
 
         [Required]
         public int Quantity { get; set; }
+
+        public decimal TotalPrice { get; set; }
     }
+
+
 }
