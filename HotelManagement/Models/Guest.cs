@@ -26,7 +26,24 @@ namespace HotelManagement.Models
         [Display(Name = "Phone Number")]
         public string Phone { get; set; }
 
-        public virtual ICollection<Room> Rooms { get; set; }
+        public int RoomId { get; set; } // Foreign key
+
+        [Display(Name = "Room")]
+        public virtual Room Room { get; set; } // Navigation property
+
+
+        [Required(ErrorMessage = "Check-in date is required")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Check-In Date")]
+        public DateTime CheckInDate { get; set; }
+
+        [Required(ErrorMessage = "Check-out date is required")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Check-Out Date")]
+        public DateTime CheckOutDate { get; set; }
+
+
+
         //public virtual ICollection<FoodOrder> FoodOrders { get; set; }
     }
 }

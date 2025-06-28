@@ -4,37 +4,59 @@
     ViewBag.Title = "Edit Guest";
 }
 
-<h2>Edit Guest</h2>
+<h2 style="font-size: 32px; color: #2c3e50; margin-bottom: 20px; text-align:center;">
+    🧾 Edit Guest
+</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
     @Html.HiddenFor(model => model.GuestId)
 
-    <div class="form-horizontal">
-        @Html.ValidationSummary(true)
+<div style="background-color: #e7f3ff; padding: 25px; border-radius: 8px; max-width: 600px; margin: auto;">
+    @Html.ValidationSummary(true, "", new { @style = "color:red; margin-bottom: 15px;" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">@Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })</div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">@Html.TextBoxFor(model => model.Email, new { @class = "form-control" })</div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">@Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })</div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Update" class="btn btn-primary" />
-                @Html.ActionLink("Cancel", "Index", "Guest", null, new { @class = "btn btn-default" })
-            </div>
-        </div>
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.FullName, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
     </div>
+
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.Phone, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        <label style="width: 150px; font-weight: 600; font-size: 16px; color: #34495e;">Room Number</label>
+        @Html.DropDownList("RoomId", null, "-- Select Room --", new
+        {
+            @class = "form-control",
+            style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;"
+        })
+        @Html.ValidationMessageFor(model => model.RoomId, "", new { @style = "color: red;" })
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.CheckInDate, new { @type = "date", @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.CheckOutDate, new { @type = "date", @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+    <div style="text-align: center; margin-top: 25px;">
+        <input type="submit" value="Update" class="btn btn-primary" style="font-size: 18px; padding: 10px 30px;" />
+        @Html.ActionLink("Cancel", "Index", "Guest", null, new
+        {
+            @class = "btn btn-default",
+            style = "font-size: 18px; padding: 10px 25px; margin-left: 10px;"
+        })
+    </div>
+</div>
 }

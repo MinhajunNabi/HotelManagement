@@ -124,7 +124,6 @@
     <Compile Include="Controllers\FoodOrdersController.cs" />
     <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,13 +152,17 @@
     <Compile Include="Migrations\202506271625173_AddUserTable.designer.cs">
       <DependentUpon>202506271625173_AddUserTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202506271902371_createTable.cs" />
-    <Compile Include="Migrations\202506271902371_createTable.designer.cs">
-      <DependentUpon>202506271902371_createTable.cs</DependentUpon>
+    <Compile Include="Migrations\202506280841241_room.cs" />
+    <Compile Include="Migrations\202506280841241_room.designer.cs">
+      <DependentUpon>202506280841241_room.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202506280644042_AddTotalPriceToFoodOrder.cs" />
-    <Compile Include="Migrations\202506280644042_AddTotalPriceToFoodOrder.designer.cs">
-      <DependentUpon>202506280644042_AddTotalPriceToFoodOrder.cs</DependentUpon>
+    <Compile Include="Migrations\202506280952261_roomnum.cs" />
+    <Compile Include="Migrations\202506280952261_roomnum.designer.cs">
+      <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202506281524270_AddCheckInCheckOutDates.cs" />
+    <Compile Include="Migrations\202506281524270_AddCheckInCheckOutDates.designer.cs">
+      <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -174,10 +177,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\burger.png" />
-    <Content Include="Content\Images\chicken.png" />
-    <Content Include="Content\Images\pasta.png" />
-    <Content Include="Content\Images\pizza.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -231,9 +230,6 @@
     <Content Include="Views\FoodOrders\Create.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\FoodOrders\OrderSummary.cshtml" />
-    <Content Include="Views\FoodOrders\PaymentSuccess.cshtml" />
-    <Content Include="Views\Payment\CardPayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -257,11 +253,14 @@
     <EmbeddedResource Include="Migrations\202506271625173_AddUserTable.resx">
       <DependentUpon>202506271625173_AddUserTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506271902371_createTable.resx">
-      <DependentUpon>202506271902371_createTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506280841241_room.resx">
+      <DependentUpon>202506280841241_room.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202506280644042_AddTotalPriceToFoodOrder.resx">
-      <DependentUpon>202506280644042_AddTotalPriceToFoodOrder.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202506280952261_roomnum.resx">
+      <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506281524270_AddCheckInCheckOutDates.resx">
+      <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

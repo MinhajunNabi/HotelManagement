@@ -17,40 +17,60 @@ namespace HotelManagement.Controllers
         // GET: Guest
         public ActionResult Index()
         {
-            return View(db.Guests.ToList());
+            var guests = db.Guests.Include(g => g.Room).ToList();
+            return View(guests);
         }
 
-        // GET: Guest/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Guest guest = db.Guests.Find(id);
+            var guest = db.Guests.Include(g => g.Room).FirstOrDefault(g => g.GuestId == id);
             if (guest == null) return HttpNotFound();
 
             return View(guest);
         }
 
+
         // GET: Guest/Create
         public ActionResult Create()
         {
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber");
             return View();
         }
+
 
         // POST: Guest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GuestId,FullName,Email,Phone")] Guest guest)
+        public ActionResult Create([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
         {
+            if (db.Rooms.Find(guest.RoomId) == null)
+            {
+                ModelState.AddModelError("RoomId", "The selected room does not exist.");
+                ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
+                return View(guest);
+            }
+
             if (ModelState.IsValid)
             {
                 db.Guests.Add(guest);
+
+                // Optional: mark the room as unavailable
+                var room = db.Rooms.Find(guest.RoomId);
+                if (room != null)
+                {
+                    room.IsAvailable = false;
+                }
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
             return View(guest);
         }
+
 
         // GET: Guest/Edit/5
         public ActionResult Edit(int? id)
@@ -60,13 +80,14 @@ namespace HotelManagement.Controllers
             Guest guest = db.Guests.Find(id);
             if (guest == null) return HttpNotFound();
 
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Pass room list to dropdown
             return View(guest);
         }
 
         // POST: Guest/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone")] Guest guest)
+        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
         {
             if (ModelState.IsValid)
             {
@@ -75,8 +96,10 @@ namespace HotelManagement.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Re-populate dropdown
             return View(guest);
         }
+
 
         // GET: Guest/Delete/5
         public ActionResult Delete(int? id)

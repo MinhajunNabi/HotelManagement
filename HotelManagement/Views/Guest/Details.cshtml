@@ -2,26 +2,72 @@
 
 @{
     ViewBag.Title = "Guest Details";
+
+    int daysStayed = 0;
+    decimal pricePerNight = Model.Room != null ? Model.Room.PricePerNight : 0;
+    decimal totalPrice = 0;
+
+    if (Model.CheckOutDate > Model.CheckInDate)
+    {
+        daysStayed = (Model.CheckOutDate - Model.CheckInDate).Days;
+        totalPrice = daysStayed * pricePerNight;
+    }
 }
 
-<h2>Guest Details</h2>
+<h2 style="font-size: 32px; color: #2c3e50; margin-bottom: 25px; text-align: center;">📋 Guest Details</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Full Name</dt>
-        <dd>@Html.DisplayFor(model => model.FullName)</dd>
+<div style="background-color: #f3f9ff; padding: 30px; border-radius: 10px; max-width: 700px; margin: auto; box-shadow: 0 0 8px rgba(0,0,0,0.1); font-size: 16px;">
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Full Name:</strong>
+        <span style="color: #2c3e50;">@Model.FullName</span>
+    </div>
 
-        <dt>Email</dt>
-        <dd>@Html.DisplayFor(model => model.Email)</dd>
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Email:</strong>
+        <span style="color: #2c3e50;">@Model.Email</span>
+    </div>
 
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Phone:</strong>
+        <span style="color: #2c3e50;">@Model.Phone</span>
+    </div>
 
-        <dt>Phone</dt>
-        <dd>@Html.DisplayFor(model => model.Phone)</dd>
-    </dl>
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Room Number:</strong>
+        <span style="color: #2c3e50;">@(Model.Room != null ? Model.Room.RoomNumber : "N/A")</span>
+    </div>
+
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Price Per Night:</strong>
+        <span style="color: #2c3e50;">@pricePerNight.ToString("C")</span>
+    </div>
+
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Check-In Date:</strong>
+        <span style="color: #2c3e50;">@Model.CheckInDate.ToString("dd MMM yyyy")</span>
+    </div>
+
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Check-Out Date:</strong>
+        <span style="color: #2c3e50;">@Model.CheckOutDate.ToString("dd MMM yyyy")</span>
+    </div>
+
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Days Stayed:</strong>
+        <span style="color: #2c3e50;">
+            @(daysStayed > 0 ? $"{daysStayed} day(s)" : "Invalid date range")
+        </span>
+    </div>
+
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Total Price:</strong>
+        <span style="color: #2c3e50;">
+            @(daysStayed > 0 ? totalPrice.ToString("C") : "N/A")
+        </span>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.GuestId }, new { @class = "btn btn-primary", style = "font-size: 16px; padding: 10px 25px; margin-right: 10px;" })
+        @Html.ActionLink("Back to List", "Index", "Guest", null, new { @class = "btn btn-default", style = "font-size: 16px; padding: 10px 25px;" })
+    </div>
 </div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.GuestId }, new { @class = "btn btn-primary" }) |
-    @Html.ActionLink("Back to List", "Index", "Guest", null, new { @class = "btn btn-default" })
-</p>
