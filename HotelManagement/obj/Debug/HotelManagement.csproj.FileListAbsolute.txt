@@ -179,4 +179,4 @@ D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelM
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddUserTable.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.room.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.roomnum.resources
-D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.AssemblyReference.cache
+D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddCheckInCheckOutDates.resources

@@ -4,42 +4,61 @@
     ViewBag.Title = "Add New Guest";
 }
 
-<h2>Add New Guest</h2>
+<h2 class="text-center text-primary display-4 mb-5 fw-bold">🧾 Add New Guest</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    @Html.ValidationSummary(true)
+<div class="container p-5 rounded shadow-sm" style="max-width: 800px; background-color: #e7f3ff;">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger fs-6 text-center" })
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">@Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })</div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">@Html.TextBoxFor(model => model.Email, new { @class = "form-control" })</div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">@Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })</div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RoomId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("RoomId", null, "-- Select Room --", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.RoomId)
+    <div class="form-group row mb-4">
+        <label class="col-md-3 col-form-label fs-5 fw-semibold text-md-end">Full Name</label>
+        <div class="col-md-7">
+            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-success" />
-            @Html.ActionLink("Cancel", "Index", "Guest", null, new { @class = "btn btn-default" })
+    <div class="form-group row mb-4">
+        <label class="col-md-3 col-form-label fs-5 fw-semibold text-md-end">Email</label>
+        <div class="col-md-7">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-4">
+        <label class="col-md-3 col-form-label fs-5 fw-semibold text-md-end">Phone</label>
+        <div class="col-md-7">
+            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-5">
+        <label class="col-md-3 col-form-label fs-5 fw-semibold text-md-end">Room Number</label>
+        <div class="col-md-7">
+            @Html.DropDownList("RoomId", null, "-- Select Room --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.RoomId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.CheckInDate, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.CheckInDate, new { @type = "date", @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+    <div style="display: flex; align-items: center; margin-bottom: 18px;">
+        @Html.LabelFor(model => model.CheckOutDate, htmlAttributes: new { style = "width: 150px; font-weight: 600; font-size: 16px; color: #34495e;" })
+        @Html.TextBoxFor(model => model.CheckOutDate, new { @type = "date", @class = "form-control", style = "flex-grow: 1; padding: 8px 12px; font-size: 16px;" })
+    </div>
+
+
+    <div class="form-group row text-center">
+        <div class="col-md-10 offset-md-2">
+            <button type="submit" class="btn btn-success btn-lg me-2">Save</button>
+            @Html.ActionLink("Cancel", "Index", "Guest", null, new { @class = "btn btn-secondary btn-lg" })
         </div>
     </div>
 </div>

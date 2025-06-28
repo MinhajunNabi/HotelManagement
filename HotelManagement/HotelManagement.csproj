@@ -160,6 +160,10 @@
     <Compile Include="Migrations\202506280952261_roomnum.designer.cs">
       <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506281524270_AddCheckInCheckOutDates.cs" />
+    <Compile Include="Migrations\202506281524270_AddCheckInCheckOutDates.designer.cs">
+      <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\FoodOrder.cs" />
@@ -254,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506280952261_roomnum.resx">
       <DependentUpon>202506280952261_roomnum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506281524270_AddCheckInCheckOutDates.resx">
+      <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

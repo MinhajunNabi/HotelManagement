@@ -80,13 +80,14 @@ namespace HotelManagement.Controllers
             Guest guest = db.Guests.Find(id);
             if (guest == null) return HttpNotFound();
 
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Pass room list to dropdown
             return View(guest);
         }
 
         // POST: Guest/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone")] Guest guest)
+        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
         {
             if (ModelState.IsValid)
             {
@@ -95,8 +96,10 @@ namespace HotelManagement.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Re-populate dropdown
             return View(guest);
         }
+
 
         // GET: Guest/Delete/5
         public ActionResult Delete(int? id)

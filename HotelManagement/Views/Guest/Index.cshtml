@@ -1,34 +1,49 @@
 ﻿@model IEnumerable<HotelManagement.Models.Guest>
 
-<h2>Guest List</h2>
+@{
+    ViewBag.Title = "Guest List";
+}
 
-<p>
-    @Html.ActionLink("Add New Guest", "Create", null, new { @class = "btn btn-primary" })
-</p>
+<h2 class="text-center text-primary display-4 mb-5 fw-bold">🧾 Guest List</h2>
 
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>Full Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Room Number</th>
-        <th>Price</th>
-        <th></th>
-    </tr>
+<div class="container p-4 rounded shadow-sm" style="background-color: #e7f3ff; max-width: 1000px;">
+    <p class="text-end mb-4">
+        @Html.ActionLink("➕ Add New Guest", "Create", null, new { @class = "btn btn-success btn-lg" })
+    </p>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@item.FullName</td>
-            <td>@item.Email</td>
-            <td>@item.Phone</td>
-            <td>@(item.Room != null ? item.Room.RoomNumber : "N/A")</td>
-            <td>@(item.Room != null ? item.Room.PricePerNight.ToString("C") : "N/A")</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.GuestId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.GuestId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.GuestId })
-            </td>
-        </tr>
-    }
-</table>
+    <table class="table table-bordered table-striped text-center align-middle">
+        <thead class="table-primary">
+            <tr>
+                <th class="fs-5">Full Name</th>
+                <th class="fs-5">Email</th>
+                <th class="fs-5">Phone</th>
+                <th class="fs-5">Check In</th>
+                <th class="fs-5">Check Out</th>
+                <th class="fs-5">Room Number</th>
+                <th class="fs-5">Price</th>
+                <th class="fs-5">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+
+                <td>@item.FullName</td>
+                <td>@item.Email</td>
+                <td>@item.Phone</td>
+                <td>@item.CheckInDate</td>
+                <td>@item.CheckOutDate</td>
+                <td>@(item.Room != null ? item.Room.RoomNumber : "N/A")</td>
+                <td>@(item.Room != null ? item.Room.PricePerNight.ToString("C") : "N/A")</td>
+
+                <td>
+                    @Html.ActionLink("✏️ Edit", "Edit", new { id = item.GuestId }, new { @class = "btn btn-warning btn-sm me-1" })
+                    @Html.ActionLink("🔍 Details", "Details", new { id = item.GuestId }, new { @class = "btn btn-info btn-sm me-1" })
+                    @Html.ActionLink("🗑️ Delete", "Delete", new { id = item.GuestId }, new { @class = "btn btn-danger btn-sm" })
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
