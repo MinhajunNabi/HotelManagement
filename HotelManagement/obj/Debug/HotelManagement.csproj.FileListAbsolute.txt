@@ -174,9 +174,14 @@ C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelMa
 C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.RoomBooking.resources
 C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.FoodOrder.resources
 C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddUserTable.resources
+<<<<<<< Updated upstream
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.RoomBooking.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.FoodOrder.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddUserTable.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.room.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.roomnum.resources
 D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddCheckInCheckOutDates.resources
+=======
+C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.createTable.resources
+C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddTotalPriceToFoodOrder.resources
+>>>>>>> Stashed changes

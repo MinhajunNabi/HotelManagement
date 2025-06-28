@@ -3,23 +3,41 @@ using System.Web.Mvc;
 using HotelManagement.Context;
 using HotelManagement.Models;
 
-public class BookingsController : Controller
+namespace HotelManagement.Controllers
 {
-    private ApplicationDbContext db = new ApplicationDbContext();
-
-    public ActionResult Index() => View(db.Bookings.ToList());
-
-    public ActionResult Create() => View();
-
-    [HttpPost]
-    public ActionResult Create(Booking booking)
+    public class BookingsController : Controller
     {
-        if (ModelState.IsValid)
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
+
+        public ActionResult Index()
         {
-            db.Bookings.Add(booking);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return View(db.Bookings.ToList());
         }
-        return View(booking);
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Booking booking)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Bookings.Add(booking);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(booking);
+        }
+
+        public ActionResult BookRoom()
+        {
+            if (Session["GuestId"] == null)
+                return RedirectToAction("Login", "Guest", new { returnUrl = Url.Action("BookRoom", "Bookings") });
+
+            return View();
+        }
     }
 }

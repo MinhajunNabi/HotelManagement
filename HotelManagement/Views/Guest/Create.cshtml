@@ -1,15 +1,23 @@
 ﻿@model HotelManagement.Models.Guest
 
 @{
-    ViewBag.Title = "Add New Guest";
+    ViewBag.Title = "Sign Up";
+    string returnUrl = ViewBag.ReturnUrl as string ?? "";
 }
 
+<<<<<<< Updated upstream
 <h2 class="text-center text-primary display-4 mb-5 fw-bold">🧾 Add New Guest</h2>
+=======
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="text-center mb-4">Sign Up</h2>
+>>>>>>> Stashed changes
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+    @using (Html.BeginForm("Create", "Guest", FormMethod.Post, new { @class = "border p-4 rounded shadow-sm bg-light" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("returnUrl", returnUrl)
 
+<<<<<<< Updated upstream
 <div class="container p-5 rounded shadow-sm" style="max-width: 800px; background-color: #e7f3ff;">
     @Html.ValidationSummary(true, "", new { @class = "text-danger fs-6 text-center" })
 
@@ -63,3 +71,26 @@
     </div>
 </div>
 }
+=======
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.FullName, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Enter full name" })
+            @Html.ValidationMessageFor(m => m.FullName)
+        </div>
+
+        <div class="form-group mb-3">
+            @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Enter email", type = "email" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+
+        <div class="form-group mb-4">
+            @Html.LabelFor(m => m.Phone, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Enter phone" })
+            @Html.ValidationMessageFor(m => m.Phone)
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    }
+</div>
+>>>>>>> Stashed changes

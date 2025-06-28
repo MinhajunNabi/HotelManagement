@@ -1,19 +1,17 @@
 ﻿using HotelManagement.Context;
 using HotelManagement.Models;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace HotelManagement.Controllers
 {
     public class GuestController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
+<<<<<<< Updated upstream
         // GET: Guest
         public ActionResult Index()
         {
@@ -44,6 +42,48 @@ namespace HotelManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
+=======
+        // GET: Guest/Login
+        public ActionResult Login(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        // POST: Guest/Login
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string email, string phone, string returnUrl)
+        {
+            var guest = db.Guests.FirstOrDefault(g => g.Email == email && g.Phone == phone);
+            if (guest != null)
+            {
+                Session["GuestId"] = guest.GuestId;
+                Session["GuestName"] = guest.FullName;
+
+                if (!string.IsNullOrEmpty(returnUrl))
+                    return Redirect(returnUrl);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Error = "Invalid email or phone.";
+            ViewBag.ReturnUrl = returnUrl; // Important to keep returnUrl on error reload
+            return View();
+        }
+
+        // GET: Guest/Signup
+        public ActionResult Create(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        // POST: Guest/Signup
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "FullName,Email,Phone")] Guest guest, string returnUrl)
+>>>>>>> Stashed changes
         {
             if (db.Rooms.Find(guest.RoomId) == null)
             {
@@ -64,9 +104,11 @@ namespace HotelManagement.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                // After signup redirect to login with same returnUrl
+                return RedirectToAction("Login", new { returnUrl = returnUrl });
             }
 
+<<<<<<< Updated upstream
             ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
             return View(guest);
         }
@@ -130,6 +172,17 @@ namespace HotelManagement.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+=======
+            ViewBag.ReturnUrl = returnUrl;
+            return View(guest);
+        }
+
+        // GET: Guest/Logout
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+>>>>>>> Stashed changes
         }
     }
 }

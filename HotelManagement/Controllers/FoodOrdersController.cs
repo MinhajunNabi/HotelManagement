@@ -4,95 +4,103 @@ using HotelManagement.Context;
 using HotelManagement.Models;
 using System.Collections.Generic;
 
-public class FoodOrdersController : Controller
+namespace HotelManagement.Controllers
 {
-    private ApplicationDbContext db = new ApplicationDbContext();
-
-    public ActionResult Index() => View(db.FoodOrders.ToList());
-
-    public ActionResult Create() => View();
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public ActionResult Create(FormCollection form)
+    public class FoodOrdersController : Controller
     {
-        string guestName = form["GuestName"];
-        string quantityStr = form["Quantity"];
-        string[] selectedItems = form.GetValues("FoodItems");
-        int quantity = int.Parse(quantityStr);
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-        // ✅ Price Dictionary
-        var prices = new Dictionary<string, decimal>
-        {
-            { "Burger", 150 },
-            { "Pizza", 250 },
-            { "Pasta", 200 },
-            { "Chicken", 180 }
-        };
+        public ActionResult Index() => View(db.FoodOrders.ToList());
 
-        decimal total = 0;
-        if (selectedItems != null)
+        public ActionResult Create() => View();
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(FormCollection form)
         {
-            foreach (string item in selectedItems)
+            string guestName = form["GuestName"];
+            string quantityStr = form["Quantity"];
+            string[] selectedItems = form.GetValues("FoodItems");
+            int quantity = int.Parse(quantityStr);
+
+            var prices = new Dictionary<string, decimal>
             {
-                if (prices.ContainsKey(item))
+                { "Burger", 150 },
+                { "Pizza", 250 },
+                { "Pasta", 200 },
+                { "Chicken", 180 }
+            };
+
+            decimal total = 0;
+            if (selectedItems != null)
+            {
+                foreach (string item in selectedItems)
                 {
-                    total += prices[item];
+                    if (prices.ContainsKey(item))
+                    {
+                        total += prices[item];
+                    }
                 }
+                total *= quantity;
             }
-            total *= quantity;
+
+            var order = new FoodOrder
+            {
+                GuestName = guestName,
+                SelectedItems = selectedItems != null ? string.Join(",", selectedItems) : "",
+                Quantity = quantity,
+                TotalPrice = total
+            };
+
+            db.FoodOrders.Add(order);
+            db.SaveChanges();
+
+            return RedirectToAction("OrderSummary", new { id = order.Id });
         }
 
-        var order = new FoodOrder
+        public ActionResult OrderSummary(int id)
         {
-            GuestName = guestName,
-            SelectedItems = selectedItems != null ? string.Join(",", selectedItems) : "",
-            Quantity = quantity,
-            TotalPrice = total
-        };
+            var order = db.FoodOrders.Find(id);
+            if (order == null)
+                return HttpNotFound();
 
-        db.FoodOrders.Add(order);
-        db.SaveChanges();
-
-        return RedirectToAction("OrderSummary", new { id = order.Id });
-    }
-
-    public ActionResult OrderSummary(int id)
-    {
-        var order = db.FoodOrders.Find(id);
-        if (order == null)
-            return HttpNotFound();
-
-        return View(order);
-    }
-
-    // ✅ STEP 2: Payment handler (new)
-    [HttpPost]
-    public ActionResult ProcessPayment(int orderId)
-    {
-        var order = db.FoodOrders.Find(orderId);
-        if (order == null)
-            return HttpNotFound();
-
-        // Simulate payment (always succeeds for now)
-        bool paymentSuccess = SimulatePayment(order.TotalPrice);
-
-        if (paymentSuccess)
-        {
-            ViewBag.Message = "✅ Payment Successful!";
-            return View("PaymentSuccess", order);
+            return View(order);
         }
-        else
-        {
-            ViewBag.Message = "❌ Payment Failed. Please try again.";
-            return View("PaymentFailed", order);
-        }
-    }
 
-    // ✅ Simulated API method (you can later replace this with real payment API call)
-    private bool SimulatePayment(decimal amount)
-    {
-        // You can simulate delay or failure logic if needed
-        return true;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ProcessPayment(int orderId)
+        {
+            var order = db.FoodOrders.Find(orderId);
+            if (order == null)
+                return HttpNotFound();
+
+            bool paymentSuccess = SimulatePayment(order.TotalPrice);
+
+            if (paymentSuccess)
+            {
+                ViewBag.Message = "✅ Payment Successful!";
+                return View("PaymentSuccess", order);
+            }
+            else
+            {
+                ViewBag.Message = "❌ Payment Failed. Please try again.";
+                return View("PaymentFailed", order);
+            }
+        }
+
+        private bool SimulatePayment(decimal amount)
+        {
+            // Simulated payment success always
+            return true;
+        }
+
+        public ActionResult OrderFood()
+        {
+            if (Session["GuestId"] == null)
+                return RedirectToAction("Login", "Guest", new { returnUrl = Url.Action("OrderFood", "FoodOrders") });
+
+            return View();
+        }
     }
 }
