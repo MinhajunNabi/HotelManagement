@@ -1,36 +1,41 @@
 ﻿@model IEnumerable<HotelManagement.Models.Room>
 
 @{
-    ViewBag.Title = "Rooms";
+    ViewBag.Title = "Room List";
 }
 
-<h2>Room List</h2>
+<h2 style="font-size: 32px; color: #2c3e50; margin-bottom: 25px; text-align: center;">🏨 Room List</h2>
 
-<p>
-    @Html.ActionLink("Add New Room", "Create")
-</p>
+<div style="text-align: center; margin-bottom: 20px;">
+    @Html.ActionLink("➕ Add New Room", "Create", null, new { @class = "btn btn-success", style = "font-size: 16px; padding: 10px 25px;" })
+</div>
 
-<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.RoomNumber)</th>
-        <th>@Html.DisplayNameFor(model => model.Type)</th>
-        <th>@Html.DisplayNameFor(model => model.PricePerNight)</th>
-        <th>@Html.DisplayNameFor(model => model.IsAvailable)</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.RoomNumber)</td>
-            <td>@Html.DisplayFor(modelItem => item.Type)</td>
-            <td>@String.Format("{0:C}", item.PricePerNight)</td>
-            <td>@(item.IsAvailable ? "Yes" : "No")</td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.RoomId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.RoomId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.RoomId })
-            </td>
-        </tr>
-    }
-</table>
+<div style="background-color: #f3f9ff; padding: 30px; border-radius: 10px; max-width: 900px; margin: auto; box-shadow: 0 0 8px rgba(0,0,0,0.1);">
+    <table class="table table-bordered table-striped" style="font-size: 16px;">
+        <thead style="background-color: #dff0ff; color: #2c3e50;">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().RoomNumber)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().Type)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().PricePerNight)</th>
+                <th>@Html.DisplayNameFor(model => model.FirstOrDefault().IsAvailable)</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.RoomNumber)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                    <td>@item.PricePerNight.ToString("C")</td>
+                    <td>@(item.IsAvailable ? "✅ Available" : "❌ Booked")</td>
+                    <td style="text-align: center;">
+                        @Html.ActionLink("✏️ Edit", "Edit", new { id = item.RoomId }, new { @class = "btn btn-sm btn-primary", style = "margin-right: 5px;" })
+                        @Html.ActionLink("📄 Details", "Details", new { id = item.RoomId }, new { @class = "btn btn-sm btn-info", style = "margin-right: 5px;" })
+                        @Html.ActionLink("🗑️ Delete", "Delete", new { id = item.RoomId }, new { @class = "btn btn-sm btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

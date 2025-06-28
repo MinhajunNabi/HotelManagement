@@ -4,25 +4,31 @@
     ViewBag.Title = "Room Details";
 }
 
-<h2>Room Details</h2>
+<h2 style="font-size: 32px; color: #2c3e50; margin-bottom: 25px; text-align: center;">📄 Room Details</h2>
 
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.RoomNumber)</dt>
-        <dd>@Html.DisplayFor(model => model.RoomNumber)</dd>
+<div style="background-color: #f3f9ff; padding: 30px; border-radius: 10px; max-width: 700px; margin: auto; box-shadow: 0 0 8px rgba(0,0,0,0.1); font-size: 16px;">
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Room Number:</strong>
+        <span style="color: #2c3e50;">@Model.RoomNumber</span>
+    </div>
 
-        <dt>@Html.DisplayNameFor(model => model.Type)</dt>
-        <dd>@Html.DisplayFor(model => model.Type)</dd>
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Type:</strong>
+        <span style="color: #2c3e50;">@Model.Type</span>
+    </div>
 
-        <dt>@Html.DisplayNameFor(model => model.PricePerNight)</dt>
-        <dd>@String.Format("{0:C}", Model.PricePerNight)</dd>
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Price Per Night:</strong>
+        <span style="color: #2c3e50;">@Model.PricePerNight.ToString("C")</span>
+    </div>
 
-        <dt>@Html.DisplayNameFor(model => model.IsAvailable)</dt>
-        <dd>@(Model.IsAvailable ? "Yes" : "No")</dd>
-    </dl>
+    <div style="display: flex; margin-bottom: 15px;">
+        <strong style="width: 180px; color: #34495e;">Availability:</strong>
+        <span style="color: #2c3e50;">@(Model.IsAvailable ? "✅ Available" : "❌ Booked")</span>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+        @Html.ActionLink("✏️ Edit", "Edit", new { id = Model.RoomId }, new { @class = "btn btn-primary", style = "font-size: 16px; padding: 10px 25px; margin-right: 10px;" })
+        @Html.ActionLink("↩️ Back to List", "Index", null, new { @class = "btn btn-default", style = "font-size: 16px; padding: 10px 25px;" })
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RoomId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

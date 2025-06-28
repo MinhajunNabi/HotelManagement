@@ -4,30 +4,39 @@
     ViewBag.Title = "Delete Room";
 }
 
-<h2>Delete Room</h2>
+<h2 style="font-size: 32px; color: #c0392b; margin-bottom: 25px; text-align: center;">🗑️ Delete Room</h2>
 
-<h3>Are you sure you want to delete this room?</h3>
-<div>
-    <h4>Room</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Room Number</dt>
-        <dd>@Html.DisplayFor(model => model.RoomNumber)</dd>
+<h3 style="text-align: center; color: #e74c3c;">Are you sure you want to delete this room?</h3>
 
-        <dt>Type</dt>
-        <dd>@Html.DisplayFor(model => model.Type)</dd>
+<div style="background-color: #fff0f0; padding: 30px; border-radius: 10px; max-width: 700px; margin: 30px auto; box-shadow: 0 0 8px rgba(0,0,0,0.1); font-size: 16px;">
+    <div style="margin-bottom: 20px;">
+        <strong style="width: 180px; color: #34495e;">Room Number:</strong>
+        <span style="color: #2c3e50;">@Model.RoomNumber</span>
+    </div>
 
-        <dt>Price Per Night</dt>
-        <dd>@Html.DisplayFor(model => model.PricePerNight)</dd>
+    <div style="margin-bottom: 20px;">
+        <strong style="width: 180px; color: #34495e;">Type:</strong>
+        <span style="color: #2c3e50;">@Model.Type</span>
+    </div>
 
-        <dt>Is Available</dt>
-        <dd>@Html.DisplayFor(model => model.IsAvailable)</dd>
-    </dl>
+    <div style="margin-bottom: 20px;">
+        <strong style="width: 180px; color: #34495e;">Price Per Night:</strong>
+        <span style="color: #2c3e50;">@Model.PricePerNight.ToString("C")</span>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <strong style="width: 180px; color: #34495e;">Availability:</strong>
+        <span style="color: #2c3e50;">@(Model.IsAvailable ? "✅ Available" : "❌ Booked")</span>
+    </div>
 
     @using (Html.BeginForm("Delete", "Rooms", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.RoomId)
-        <input type="submit" value="Delete" class="btn btn-danger" /> 
-}
+
+        <div style="text-align: center; margin-top: 30px;">
+            <input type="submit" value="🗑️ Confirm Delete" class="btn btn-danger" style="font-size: 16px; padding: 10px 25px; margin-right: 10px;" />
+            @Html.ActionLink("↩️ Cancel", "Index", null, new { @class = "btn btn-default", style = "font-size: 16px; padding: 10px 25px;" })
+        </div>
+    }
 </div>

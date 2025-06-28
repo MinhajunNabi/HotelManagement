@@ -17,10 +17,10 @@
                 <th class="fs-5">Full Name</th>
                 <th class="fs-5">Email</th>
                 <th class="fs-5">Phone</th>
-                <th class="fs-5">Check In</th>
-                <th class="fs-5">Check Out</th>
                 <th class="fs-5">Room Number</th>
                 <th class="fs-5">Price</th>
+                <th class="fs-5">Check In</th>
+                <th class="fs-5">Check Out</th>
                 <th class="fs-5">Actions</th>
             </tr>
         </thead>
@@ -32,10 +32,10 @@
                 <td>@item.FullName</td>
                 <td>@item.Email</td>
                 <td>@item.Phone</td>
-                <td>@item.CheckInDate</td>
-                <td>@item.CheckOutDate</td>
                 <td>@(item.Room != null ? item.Room.RoomNumber : "N/A")</td>
                 <td>@(item.Room != null ? item.Room.PricePerNight.ToString("C") : "N/A")</td>
+                <td>@item.CheckInDate</td>
+                <td>@item.CheckOutDate</td>
 
                 <td>
                     @Html.ActionLink("✏️ Edit", "Edit", new { id = item.GuestId }, new { @class = "btn btn-warning btn-sm me-1" })

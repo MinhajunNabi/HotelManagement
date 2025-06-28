@@ -4,54 +4,45 @@
     ViewBag.Title = "Edit Room";
 }
 
-<h2>Edit Room</h2>
+<h2 style="font-size: 32px; color: #2c3e50; margin-bottom: 25px; text-align: center;">✏️ Edit Room</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
+<div style="background-color: #f3f9ff; padding: 30px; border-radius: 10px; max-width: 700px; margin: auto; box-shadow: 0 0 8px rgba(0,0,0,0.1); font-size: 16px;">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.RoomId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
-            </div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom: 15px;" })
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            @Html.LabelFor(model => model.RoomNumber, htmlAttributes: new { @class = "control-label", style = "color: #34495e;" })
+            @Html.EditorFor(model => model.RoomNumber, new { htmlAttributes = new { @class = "form-control", style = "padding: 10px;" } })
+            @Html.ValidationMessageFor(model => model.RoomNumber, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label", style = "color: #34495e;" })
+            @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control", style = "padding: 10px;" } })
+            @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PricePerNight, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PricePerNight, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PricePerNight, "", new { @class = "text-danger" })
-            </div>
+        <div class="form-group" style="margin-bottom: 20px;">
+            @Html.LabelFor(model => model.PricePerNight, htmlAttributes: new { @class = "control-label", style = "color: #34495e;" })
+            @Html.EditorFor(model => model.PricePerNight, new { htmlAttributes = new { @class = "form-control", style = "padding: 10px;" } })
+            @Html.ValidationMessageFor(model => model.PricePerNight, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <div class="checkbox">
-                    <label>
-                        @Html.CheckBoxFor(model => model.IsAvailable) Available
-                    </label>
-                </div>
-            </div>
+        <div class="form-group" style="margin-bottom: 25px;">
+            <label style="color: #34495e; font-weight: 600;">
+                @Html.CheckBoxFor(model => model.IsAvailable)
+                Available
+            </label>
+            @Html.ValidationMessageFor(model => model.IsAvailable, "", new { @class = "text-danger" })
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-            </div>
+        <div style="text-align: center;">
+            <input type="submit" value="💾 Save" class="btn btn-success" style="font-size: 16px; padding: 10px 25px; margin-right: 10px;" />
+            @Html.ActionLink("↩️ Back to List", "Index", null, new { @class = "btn btn-default", style = "font-size: 16px; padding: 10px 25px;" })
         </div>
-    </div>
-}
+    }
+</div>

@@ -185,3 +185,5 @@ D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelM
 C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.createTable.resources
 C:\Users\USER\Documents\GitHub\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.AddTotalPriceToFoodOrder.resources
 >>>>>>> Stashed changes
+D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.csproj.AssemblyReference.cache
+D:\AIUB\Semester 09\ADN Project\HotelManagement\HotelManagement\obj\Debug\HotelManagement.Migrations.createtable.resources

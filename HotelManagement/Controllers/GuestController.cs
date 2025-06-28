@@ -11,7 +11,6 @@ namespace HotelManagement.Controllers
     {
         private readonly ApplicationDbContext db = new ApplicationDbContext();
 
-<<<<<<< Updated upstream
         // GET: Guest
         public ActionResult Index()
         {
@@ -19,6 +18,7 @@ namespace HotelManagement.Controllers
             return View(guests);
         }
 
+        // GET: Guest/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -29,20 +29,95 @@ namespace HotelManagement.Controllers
             return View(guest);
         }
 
-
-        // GET: Guest/Create
-        public ActionResult Create()
+        // GET: Guest/Create (Signup)
+        public ActionResult Create(string returnUrl)
         {
             ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber");
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
 
         // POST: Guest/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
-=======
+        public ActionResult Create([Bind(Include = "GuestId,FullName,Email,Phone,RoomId,CheckInDate,CheckOutDate")] Guest guest, string returnUrl)
+        {
+            if (db.Rooms.Find(guest.RoomId) == null)
+            {
+                ModelState.AddModelError("RoomId", "The selected room does not exist.");
+                ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
+                return View(guest);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var room = db.Rooms.Find(guest.RoomId);
+                guest.CheckInDate = guest.CheckInDate ?? System.DateTime.Now;
+                guest.CheckOutDate = guest.CheckOutDate ?? System.DateTime.Now.AddDays(1);
+
+                db.Guests.Add(guest);
+
+                if (room != null) room.IsAvailable = false;
+
+                db.SaveChanges();
+                return RedirectToAction("Login", new { returnUrl = returnUrl });
+            }
+
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
+            ViewBag.ReturnUrl = returnUrl;
+            return View(guest);
+        }
+
+        // GET: Guest/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Guest guest = db.Guests.Find(id);
+            if (guest == null) return HttpNotFound();
+
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
+            return View(guest);
+        }
+
+        // POST: Guest/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone,RoomId,CheckInDate,CheckOutDate")] Guest guest)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(guest).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
+            return View(guest);
+        }
+
+        // GET: Guest/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Guest guest = db.Guests.Find(id);
+            if (guest == null) return HttpNotFound();
+
+            return View(guest);
+        }
+
+        // POST: Guest/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Guest guest = db.Guests.Find(id);
+            db.Guests.Remove(guest);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: Guest/Login
         public ActionResult Login(string returnUrl)
         {
@@ -68,113 +143,8 @@ namespace HotelManagement.Controllers
             }
 
             ViewBag.Error = "Invalid email or phone.";
-            ViewBag.ReturnUrl = returnUrl; // Important to keep returnUrl on error reload
-            return View();
-        }
-
-        // GET: Guest/Signup
-        public ActionResult Create(string returnUrl)
-        {
             ViewBag.ReturnUrl = returnUrl;
             return View();
-        }
-
-        // POST: Guest/Signup
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FullName,Email,Phone")] Guest guest, string returnUrl)
->>>>>>> Stashed changes
-        {
-            if (db.Rooms.Find(guest.RoomId) == null)
-            {
-                ModelState.AddModelError("RoomId", "The selected room does not exist.");
-                ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
-                return View(guest);
-            }
-
-            if (ModelState.IsValid)
-            {
-                db.Guests.Add(guest);
-
-                // Optional: mark the room as unavailable
-                var room = db.Rooms.Find(guest.RoomId);
-                if (room != null)
-                {
-                    room.IsAvailable = false;
-                }
-
-                db.SaveChanges();
-                // After signup redirect to login with same returnUrl
-                return RedirectToAction("Login", new { returnUrl = returnUrl });
-            }
-
-<<<<<<< Updated upstream
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId);
-            return View(guest);
-        }
-
-
-        // GET: Guest/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            Guest guest = db.Guests.Find(id);
-            if (guest == null) return HttpNotFound();
-
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Pass room list to dropdown
-            return View(guest);
-        }
-
-        // POST: Guest/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GuestId,FullName,Email,Phone,RoomId")] Guest guest)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(guest).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.RoomId = new SelectList(db.Rooms, "RoomId", "RoomNumber", guest.RoomId); // Re-populate dropdown
-            return View(guest);
-        }
-
-
-        // GET: Guest/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            Guest guest = db.Guests.Find(id);
-            if (guest == null) return HttpNotFound();
-
-            return View(guest);
-        }
-
-        // POST: Guest/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Guest guest = db.Guests.Find(id);
-            db.Guests.Remove(guest);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-=======
-            ViewBag.ReturnUrl = returnUrl;
-            return View(guest);
         }
 
         // GET: Guest/Logout
@@ -182,7 +152,12 @@ namespace HotelManagement.Controllers
         {
             Session.Clear();
             return RedirectToAction("Login");
->>>>>>> Stashed changes
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

@@ -164,6 +164,10 @@
     <Compile Include="Migrations\202506281524270_AddCheckInCheckOutDates.designer.cs">
       <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202506281842528_createtable.cs" />
+    <Compile Include="Migrations\202506281842528_createtable.designer.cs">
+      <DependentUpon>202506281842528_createtable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\FoodOrder.cs" />
@@ -261,6 +265,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202506281524270_AddCheckInCheckOutDates.resx">
       <DependentUpon>202506281524270_AddCheckInCheckOutDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202506281842528_createtable.resx">
+      <DependentUpon>202506281842528_createtable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

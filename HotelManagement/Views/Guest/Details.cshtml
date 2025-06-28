@@ -9,7 +9,13 @@
 
     if (Model.CheckOutDate > Model.CheckInDate)
     {
-        daysStayed = (Model.CheckOutDate - Model.CheckInDate).Days;
+        var duration = Model.CheckOutDate - Model.CheckInDate;
+        if (duration.HasValue)
+        {
+            daysStayed = duration.Value.Days;
+            totalPrice = daysStayed * pricePerNight;
+        }
+
         totalPrice = daysStayed * pricePerNight;
     }
 }
@@ -44,12 +50,16 @@
 
     <div style="display: flex; margin-bottom: 15px;">
         <strong style="width: 180px; color: #34495e;">Check-In Date:</strong>
-        <span style="color: #2c3e50;">@Model.CheckInDate.ToString("dd MMM yyyy")</span>
+        <span style="color: #2c3e50;">
+            @(Model.CheckInDate.HasValue ? Model.CheckInDate.Value.ToString("dd MMM yyyy") : "N/A")
+        </span>
     </div>
 
     <div style="display: flex; margin-bottom: 15px;">
         <strong style="width: 180px; color: #34495e;">Check-Out Date:</strong>
-        <span style="color: #2c3e50;">@Model.CheckOutDate.ToString("dd MMM yyyy")</span>
+        <span style="color: #2c3e50;">
+            @(Model.CheckOutDate.HasValue ? Model.CheckOutDate.Value.ToString("dd MMM yyyy") : "N/A")
+        </span>
     </div>
 
     <div style="display: flex; margin-bottom: 15px;">
